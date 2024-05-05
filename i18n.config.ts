@@ -39,6 +39,18 @@ export default defineI18nConfig(() => ({
           "hosting_name": "Home"
         }
       },
+      tasks: {
+        form: {
+          title: 'Nouvelle tâche',
+          name: 'Nom',
+          required: 'Ce champ est obligatoire.',
+          add: 'Ajouter',
+          done: 'Fait'
+        },
+        list: {
+          title: 'Liste des tâches'
+        }
+      },
       articles: {
         title: 'Articles'
       }
