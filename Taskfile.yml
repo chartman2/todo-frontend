@@ -1,0 +1,36 @@
+version: '3'
+
+dotenv: ['.env']
+
+tasks:
+  build:
+    desc: Construction des services Docker
+    cmds:
+      - UID_GID="$(id -u):$(id -g)" docker compose build
+  up:
+    desc: Démarrage des services Docker
+    cmds:
+      - UID_GID="$(id -u):$(id -g)" docker compose up -d
+      - cat ~/.config/code-server/config.yaml 
+      - task: edge
+  down:
+    desc: Arrêt des services Docker
+    cmds:
+      - docker compose down
+  ps:
+    desc: Affichage de l'état des processus des servicese Docker
+    cmds:
+      - docker compose ps
+  logs:
+    desc: Afficher les logs des services Docker
+    cmds:
+      - docker compose logs
+  edge:
+    desc: Démarrage de Microsoft Edge avec applications
+    cmds:
+      - flatpak run com.microsoft.Edge https://$APP_URL https://$APP_VSCODE_URL > /dev/null
+    silent: true
+  shell:
+    desc: SHELL dans l'application
+    cmds:
+      - UID_GID="$(id -u):$(id -g)" docker compose exec frontend sh
