@@ -7,7 +7,7 @@ export default defineI18nConfig(() => ({
     },
     fr: {
       global: {
-          name: "Todo frontend",
+          name: "Todo application",
           disconnect: "Déconnexion",
           home: "Accueil",
           legal_notices: "Mentions légales",
