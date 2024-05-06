@@ -3,6 +3,8 @@
     <v-container>
       <page-title :title="$t('global.name')" icon="i-mdi:format-list-checks" />
 
+      <partial-todo-new />
+      
       <partial-todo-list />
     </v-container>
   </v-row>

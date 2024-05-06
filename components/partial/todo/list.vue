@@ -1,25 +1,4 @@
 <template>
-  <section-title :title="$t('tasks.form.title')" />
-  <v-form 
-    @submit.prevent="addTask" 
-    v-model="formValid"
-  >
-    <v-row>
-      <v-col cols="8">
-        <v-text-field
-          v-model="newTaskName"
-          :rules="rules"
-          :label="$t('tasks.form.name')"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="4">
-        <v-btn type="submit" block :disabled="!formValid">
-          {{ $t('tasks.form.add') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-form>
-
   <section-title :title="$t('tasks.list.title')" />
   <v-row
     v-for="(task, key) in listTasks"
@@ -45,32 +24,13 @@
   </v-row>
 </template>
 <script setup lang="ts">
-import type { ITodoItem } from '~/types/todo'
+import { useTodoStore } from '~/stores/todo'
 
-const { t } = useI18n()
-
-const listTasks: ITodoItem[] = reactive([])
-const newTaskName = ref('')
-const formValid = ref(false)
-const rules = reactive([
-  (value: string) => {
-    if (value) return true
-
-    return t('tasks.form.required')
-  },
-])
-
-const addTask = () => {
-  listTasks.push({
-    name: newTaskName.value,
-    done: false
-  })
-
-  newTaskName.value = ''
-}
+const todoStore = useTodoStore()
+const listTasks = computed(() => todoStore.getList)
 
 const performTask = (key: number) => {
-  listTasks[key].done = true
+  todoStore.performItem(key)
 }
 
 </script>
