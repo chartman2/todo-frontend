@@ -4,7 +4,12 @@
     v-for="(task, key) in listTasks"
     :key="key"
   >
-    <v-col cols="8">
+    <v-col cols="4">
+      <div :class="{'text-decoration-line-through': task.done === true}">
+        {{ $t('tasks.scope.' + task.scope) }}
+      </div>
+    </v-col>
+    <v-col cols="4">
       <div :class="{'text-decoration-line-through': task.done === true}">
         {{ task.name }}
       </div>

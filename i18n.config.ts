@@ -49,6 +49,12 @@ export default defineI18nConfig(() => ({
         },
         list: {
           title: 'Liste des tâches'
+        },
+        scope: {
+          personnal: 'Personnel',
+          work: 'Travail',
+          family: 'Famille',
+          other: 'Autre'
         }
       },
       articles: {

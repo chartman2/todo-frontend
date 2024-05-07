@@ -18,14 +18,31 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <v-radio-group
+        v-model="newTaskScope"
+        :rules="rules"
+        inline
+      >
+        <v-radio
+          v-for="(scopeName, scopeKey) in scopeValues"
+          :key="scopeKey"
+          :label="$t('tasks.scope.' + scopeName)"
+          :value="scopeName"
+        ></v-radio>
+      </v-radio-group>
+    </v-row>
   </v-form>
 </template>
 <script setup lang="ts">
 import { useTodoStore } from '~/stores/todo'
+import type { IScope } from '~/types/scope'
+import { scopeValues } from '~/types/scope'
 
 const todoStore = useTodoStore()
 const { t } = useI18n()
 const newTaskName = ref('')
+const newTaskScope = ref(null as IScope | null)
 const formValid = ref(false)
 const rules = reactive([
   (value: string) => {
@@ -38,9 +55,11 @@ const rules = reactive([
 const addTask = () => {
   todoStore.addItem({
     name: newTaskName.value,
-    done: false
+    done: false,
+    scope: newTaskScope.value
   })
 
   newTaskName.value = ''
+  newTaskScope.value = null
 }
 </script>

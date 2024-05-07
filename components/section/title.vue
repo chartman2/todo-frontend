@@ -1,5 +1,5 @@
 <template>
-  <h2 class="display-2 font-weight-bold mb-3">
+  <h2 class="display-2 font-weight-bold mb-3 mt-6">
     {{ props.title }}
   </h2>
 
