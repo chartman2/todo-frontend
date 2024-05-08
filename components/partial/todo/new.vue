@@ -1,5 +1,4 @@
 <template>
-  <section-title :title="$t('tasks.form.title')" />
   <v-form 
     @submit.prevent="addTask" 
     v-model="formValid"
@@ -34,6 +33,7 @@
     </v-row>
   </v-form>
 </template>
+
 <script setup lang="ts">
 import { useTodoStore } from '~/stores/todo'
 import type { IScope } from '~/types/scope'
@@ -56,7 +56,7 @@ const addTask = () => {
   todoStore.addItem({
     name: newTaskName.value,
     done: false,
-    scope: newTaskScope.value
+    scope: newTaskScope.value as IScope
   })
 
   newTaskName.value = ''

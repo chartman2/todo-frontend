@@ -1,10 +1,9 @@
-
 // @ts-nocheck
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useApplicationStore } from '~/stores/application.ts'
 
-describe('Store: User', () => {
+describe('Store: Application', () => {
   let store = null
 
   beforeEach(() => {

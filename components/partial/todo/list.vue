@@ -1,5 +1,5 @@
 <template>
-  <section-title :title="$t('tasks.list.title')" />
+  
   <v-row
     v-for="(task, key) in listTasks"
     :key="key"
