@@ -12,7 +12,7 @@ tasks:
     cmds:
       - UID_GID="$(id -u):$(id -g)" docker compose up -d
       - cat ~/.config/code-server/config.yaml 
-      - task: edge
+      #- task: edge
   d:
     desc: Arrêt des services Docker
     cmds:
