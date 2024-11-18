@@ -61,6 +61,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - "$HOME/.local:/home/coder/.local"
       - "$HOME/.config:/home/coder/.config"
+      - "$PWD/.continue:/home/coder/.continue"
       - "$PWD:/home/coder/project"
     environment:
       - TZ=Europe/Paris

@@ -1,6 +1,22 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: {
+    enabled: Boolean(process.env.DEVTOOLS_ENABLE),
+    timeline: {
+      enabled: Boolean(process.env.DEVTOOLS_ENABLE)
+    }
+  },
+  runtimeConfig: {
+    apiBaseUrl: process.env.API_BASE_URL,
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL,
+      appUrl: process.env.APP_URL,
+      appName: process.env.APP_NAME,
+      appStorageName: process.env.APP_STORAGE_NAME,
+      cryptSecretKey: process.env.CRYPT_SECRET_KEY
+    },
+  },
+  compatibilityDate: '2024-04-03',
   app: {
     head: {
       meta: [
@@ -37,11 +53,13 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@dargmuesli/nuxt-cookie-control',
     '@unocss/nuxt',
+    'nuxt-snackbar'
   ],
   site: {
-    url: 'https://nuxt-frontend-template.traefik.me/',
-    name: 'nuxt-frontend-template',
+    url: process.env.APP_URL,
+    name: process.env.APP_NAME,
     description: 'nuxt frontend template',
+    locales: ['fr', 'en'],
     defaultLocale: 'fr', // not needed if you have @nuxtjs/i18n installed
   },
   vuetify: {
@@ -55,7 +73,18 @@ export default defineNuxtConfig({
       stylistic: true // <---
     }
   },
+  schemaOrg: {
+    identity: 'Person'
+  },
+  snackbar: {
+    top: true,
+    // right: true,
+    duration: 5000,
+  },
   i18n: {
+    strategy: 'prefix_except_default',
+    locales: ['fr', 'en'],
+    defaultLocale: 'fr',
     vueI18n: './i18n.config.ts' // if you are using custom path, default
   },
   dayjs: {
@@ -64,6 +93,7 @@ export default defineNuxtConfig({
     defaultLocale: 'fr',
     defaultTimezone: 'Europe/Paris',
   },
+  ogImage: { enabled: false },
   content: {
     watch: false,
     highlight: {
@@ -101,6 +131,31 @@ export default defineNuxtConfig({
     localeTexts: {
       fr: {
         bannerDescription: 'Nous utilisons des cookies d’origine. Ces cookies sont destinés à vous offrir une navigation optimisée sur ce site web. En poursuivant votre navigation, nous considérons que vous acceptez l’usage des cookies.'
+      }
+    }
+  },
+  vite: { // @see https://github.com/nuxt/nuxt/issues/27558
+    server: {
+      hmr: {
+        protocol: "wss",
+        clientPort: Number(process.env.HMR_PORT),
+        path: "hmr/",
+      },
+    },
+  },
+  hooks: { // @see https://github.com/nuxt/nuxt/issues/27558
+    'vite:extendConfig': (config) => {
+      if (typeof config.server === 'object' && typeof config.server.hmr === 'object') {
+        config.server.hmr.protocol = 'wss';
+        config.server.hmr.clientPort = Number(process.env.HMR_PORT);
+        config.server.hmr.path = "hmr/";
+      }
+    },
+  },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ["vitest/globals"] // TypeScript support for globals
       }
     }
   }

@@ -1,6 +1,6 @@
-FROM node:lts-alpine
+FROM node:22-alpine
 
-RUN npm install -g pnpm@8.15.4
+RUN npm install -g pnpm@9.13.0
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN chown -Rf node:node /app
 
 USER node
 
-RUN pnpm config set store-dir /home/node/.local/share/pnpm/store/v3 --global \
+RUN pnpm config set store-dir /app/.local/share/pnpm/store/v3 --global \
     && pnpm install
 
 ENV PATH ./node_modules/.bin/:$PATH

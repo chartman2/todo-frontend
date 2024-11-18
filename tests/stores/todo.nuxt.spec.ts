@@ -17,19 +17,20 @@ describe('Store: Todo', () => {
   })
 
   it('initializes with correct values', () => {
-    expect(store.list).toEqual([])
+    expect(store.getItems).toEqual([])
+    expect(store.getScopes).toEqual([])
   })
   
-  it('can add task', () => {
-    expect(store.list).toEqual([])
+  it('can set items', () => {
+    expect(store.getItems).toEqual([])
 
-    store.addItem({
+    store.setItems([{
         name: 'test name',
         done: false,
         scope: 'personnal'
-    })
+    }])
 
-    expect(store.list).toEqual([
+    expect(store.getItems).toEqual([
       {
         name: 'test name',
         done: false,
@@ -38,30 +39,30 @@ describe('Store: Todo', () => {
     ])
   })
 
-  it('can perform task', () => {
-    expect(store.list).toEqual([])
+  it('can set scopes', () => {
+    expect(store.getScopes).toEqual([])
     
-    store.addItem({
-        name: 'test name',
-        done: false,
-        scope: 'personnal'
-    })
-
-    expect(store.list).toEqual([
+    store.setScopes([
       {
-        name: 'test name',
-        done: false,
-        scope: 'personnal'
+        id: 1,
+        type: 'scope',
+        attributes: {
+          id: 1,
+          name: 'test 1',
+          nickname: 'nickanme 1'
+        }
       }
     ])
 
-    store.performItem(0)
-    
-    expect(store.list).toEqual([
+    expect(store.getScopes).toEqual([
       {
-        name: 'test name',
-        done: true,
-        scope: 'personnal'
+        id: 1,
+        type: 'scope',
+        attributes: {
+          id: 1,
+          name: 'test 1',
+          nickname: 'nickanme 1'
+        }
       }
     ])
   })

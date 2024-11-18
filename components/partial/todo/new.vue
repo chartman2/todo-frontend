@@ -24,10 +24,10 @@
         inline
       >
         <v-radio
-          v-for="(scopeName, scopeKey) in scopeValues"
+          v-for="(scope, scopeKey) in scopes"
           :key="scopeKey"
-          :label="$t('tasks.scope.' + scopeName)"
-          :value="scopeName"
+          :label="$t('tasks.scope.' + scope.attributes.nickname)"
+          :value="scope.attributes.id"
         ></v-radio>
       </v-radio-group>
     </v-row>
@@ -37,10 +37,12 @@
 <script setup lang="ts">
 import { useTodoStore } from '~/stores/todo'
 import type { IScope } from '~/types/scope'
-import { scopeValues } from '~/types/scope'
+
+const emit = defineEmits(['onCreateItem'])
 
 const todoStore = useTodoStore()
 const { t } = useI18n()
+const scopes = computed(() => todoStore.getScopes)
 const newTaskName = ref('')
 const newTaskScope = ref(null as IScope | null)
 const formValid = ref(false)
@@ -53,11 +55,7 @@ const rules = reactive([
 ])
 
 const addTask = () => {
-  todoStore.addItem({
-    name: newTaskName.value,
-    done: false,
-    scope: newTaskScope.value as IScope
-  })
+  emit('onCreateItem', newTaskName.value, newTaskScope.value)
 
   newTaskName.value = ''
   newTaskScope.value = null

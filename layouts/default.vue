@@ -1,21 +1,21 @@
 <template>
   <v-layout>
     <bar-top />
-    <page-snackbar />
     <v-app>
       <v-main
         dark="isDark"
         class="d-flex align-center fill-height pb-24"
         background-color="background"
       >
+        <NuxtLoadingIndicator />
         <slot /> 
 
         <button-back-to-top />
       </v-main>
     </v-app>
     <CookieControl locale="fr" />
-
     <bar-bottom />
+    <NuxtSnackbar />
   </v-layout>
 </template>
 
@@ -24,7 +24,6 @@
 
   const config = useRuntimeConfig()
   const applicationStore = useApplicationStore()
-  const nuxtApp = useNuxtApp()
   const theme = useTheme()
   const { locale } = useI18n()
 
@@ -44,7 +43,7 @@
 
   const storeThemeDark = computed(() => applicationStore.isDarkTheme)
   
-  nuxtApp.hook('page:finish', () => {
+  useRuntimeHook('page:finish', () => {
     theme.global.name.value = setTheme()
 
     applicationStore.setIsDarkTheme(theme.global.name.value === 'DarkTheme')

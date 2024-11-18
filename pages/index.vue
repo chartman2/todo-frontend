@@ -5,11 +5,18 @@
 
       <section-title :title="$t('tasks.form.title')" />
 
-      <partial-todo-new />
-
-      <section-title :title="$t('tasks.list.title')" />
-      
-      <partial-todo-list />
+      <v-row align="center" justify="center">
+        <v-col cols="auto">
+          <v-btn size="x-large" :nuxt="true" to="todo"> 
+            Todo list
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </v-row>
 </template>
+<script setup lang="ts">
+  definePageMeta({
+    middleware: 'auth',
+  })
+</script>

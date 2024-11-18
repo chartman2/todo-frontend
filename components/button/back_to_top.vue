@@ -13,7 +13,7 @@
   </transition>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { tryOnMounted, tryOnUnmounted } from '@vueuse/core'
 
 const showBackToTop = ref(false)

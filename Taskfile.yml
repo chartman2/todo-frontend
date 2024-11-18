@@ -30,12 +30,11 @@ tasks:
     desc: Afficher les logs des services Docker
     cmds:
       - docker compose logs
-  edge:
-    desc: Démarrage de Microsoft Edge avec applications
-    cmds:
-      - flatpak run com.microsoft.Edge https://$APP_URL https://$APP_VSCODE_URL > /dev/null
-    silent: true
   shell:
     desc: SHELL dans l'application
     cmds:
       - UID_GID="$(id -u):$(id -g)" docker compose exec frontend sh
+  plandex:
+    desc: Plandex pour l'application
+    cmds:
+      - TOKEN=1234 OPENAI_API_KEY=1234 plandex t -f prompt.txt

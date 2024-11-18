@@ -145,4 +145,3 @@
   </v-row>
 </template>
 
-<script setup lang="ts"></script>

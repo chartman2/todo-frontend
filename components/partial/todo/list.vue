@@ -4,40 +4,44 @@
       v-model="filterTaskScope"
       inline
     >
-      <v-radio
-        v-for="(scopeName, scopeKey) in scopeValues"
-        :key="scopeKey"
-        :label="$t('tasks.scope.' + scopeName)"
-        :value="scopeName"
-      />
+      <template 
+        v-for="scope in scopes"
+        :key="scope.attributes.id"
+        >
+        <v-radio
+          :label="scope.attributes.nickname"
+          :value="scope.attributes.id"
+        />
+      </template>
       <v-radio
         :label="$t('tasks.list.all')"
-        value="all"
+        :value="0"
       />
     </v-radio-group>
   </v-row>
   <v-row
-    v-for="(task, key) in listTasksFiltred"
-    :key="key"
+    v-for="task in listTasksFiltred"
+    :key="task.attributes.id"
   >
     <v-col cols="4">
       <v-chip color="primary">
-        <div :class="{'text-decoration-line-through': task.done === true}">
-          {{ $t('tasks.scope.' + task.scope) }}
+        <div :class="{'text-decoration-line-through': task.attributes.done === true}">
+          {{ $t('tasks.scope.' + getScopeNicknameFromItem(task.attributes.scopeId)) }}
+          {{ task.attributes.done === true ? 'Y' : 'N' }}
         </div>
       </v-chip>
     </v-col>
     <v-col cols="4">
-      <div :class="{'text-decoration-line-through': task.done === true}">
-        {{ task.name }}
+      <div :class="{'text-decoration-line-through': task.attributes.done === true}">
+        {{ task.attributes.name }}
       </div>
     </v-col>
     <v-col cols="4">
       <v-btn 
-        v-if="task.done === false"
+        v-if="task.attributes.done === false"
         type="button" 
         block
-        @click.prevent="performTask(key)"
+        @click.prevent="performTask(task)"
       >
         <v-icon icon="i-mdi:checkbox-marked-circle-plus-outline" />
       
@@ -48,25 +52,29 @@
 </template>
 <script setup lang="ts">
 import { useTodoStore } from '~/stores/todo'
-import { scopeValues } from '~/types/scope'
-import type { ITodoItem } from '~/types/todo';
+import type { IItemData } from '~/types/todo';
+
+const emit = defineEmits(['onUpdateItem'])
 
 const todoStore = useTodoStore()
-const listTasks = computed(() => todoStore.getList)
-const filterTaskScope = ref('all')
-const listTasksFiltred: Ref<ITodoItem[]> = ref(listTasks.value)
-
-const performTask = (key: number) => {
-  todoStore.performItem(key)
-}
-
-watch(filterTaskScope, async (newFilter, oldFilter) => {
-  if (newFilter === 'all') {
-    listTasksFiltred.value = listTasks.value
-  } else {
-    listTasksFiltred.value = listTasks.value.filter( (task) => {
-      return task.scope === newFilter
+const items = computed(() => todoStore.getItems)
+const scopes = computed(() => todoStore.getScopes)
+const filterTaskScope = ref(0)
+const listTasksFiltred = computed(() => {
+  if (filterTaskScope.value !== 0) {
+    return items.value.filter( (item) => {
+      return item.attributes.scopeId === filterTaskScope.value
     })
   }
+
+  return items.value
 })
+
+const performTask = (task: IItemData) => {
+  emit('onUpdateItem', task.attributes.id, task.attributes.name, task.attributes.scopeId, true)
+}
+
+const getScopeNicknameFromItem = (scopeId: number) => {
+  return scopes.value.find(scope => scope.attributes.id === scopeId)?.attributes.nickname
+}
 </script>

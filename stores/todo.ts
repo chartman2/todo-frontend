@@ -1,21 +1,25 @@
 
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import type { ITodoItem } from '~/types/todo'
+import type { IItemData, IScopeData } from '~/types/todo'
 
 export const useTodoStore = defineStore('todo', {
   state: () => ({
-    list: [] as ITodoItem[]
+    items: [] as IItemData[],
+    scopes: [] as IScopeData[],
+    filteredItems: [] as IItemData[],
   }),
   getters: {
-    getList: state => state.list
+    getItems: state => state.items,
+    getScopes: state => state.scopes,
+    // getFilteredItems: state => state.filteredItems
   },
   actions: {
-    addItem(item: ITodoItem) {
-      this.list.push(item)
+    setItems(items: IItemData[]) {
+      this.items = items
     },
-    performItem(key: number) {
-      this.list[key].done = true
-    }
+    setScopes(scopes: IScopeData[]) {
+      this.scopes = scopes
+    },
   },
   persist: {
       storage: persistedState.localStorage,

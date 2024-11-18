@@ -71,6 +71,11 @@ const menuItems = reactive([
     name: 'legal_notices.title',
     icon: 'i-mdi:scale-balance',
     to: '/legal_notices',
+  },
+  {
+    name: 'log_in.title',
+    icon: 'i-mdi:log-in',
+    to: '/log_in',
   }
 ])
 

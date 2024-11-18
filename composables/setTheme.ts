@@ -1,5 +1,5 @@
-import { useApplicationStore } from '~/stores/application'
 import { usePreferredDark } from '@vueuse/core'
+import { useApplicationStore } from '~/stores/application'
 
 export const setTheme = () => {
   const applicationStore = useApplicationStore()
@@ -11,9 +11,11 @@ export const setTheme = () => {
     return storeThemeDark.value === true
       ? 'DarkTheme'
       : 'LightTheme'
-  } else if (colorMode.value === true) {
+  }
+  else if (colorMode.value === true) {
     return 'DarkTheme'
-  } else {
+  }
+  else {
     return 'LightTheme'
   }
 }

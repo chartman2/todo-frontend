@@ -6,26 +6,20 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import TestResource from '~~/components/partial/todo/list.vue'
 
 describe('Components - todo/list', async () => {
-  it('is a Vue instance', async () => {
-    const wrapper = await mountSuspended(TestResource, {
-      shallow: true
-    })
+  const wrapper = await mountSuspended(TestResource)
 
+  it('is a Vue instance', async () => {
     expect(wrapper.vm).toBeTruthy()
   })
 
   it('perform task', async () => {
-    const wrapper = await mountSuspended(TestResource, {
-      shallow: true
-    })
-
-    wrapper.vm.todoStore.addItem({
+    wrapper.vm.todoStore.setItems({
       name: 'test name',
       done: false,
       scope: 'personnal'
     })
 
-    expect(wrapper.vm.todoStore.getList).toEqual([
+    expect(wrapper.vm.todoStore.getItems).toEqual([
       {
         name: 'test name',
         done: false,
@@ -35,7 +29,7 @@ describe('Components - todo/list', async () => {
 
     wrapper.vm.performTask(0)
 
-    expect(wrapper.vm.todoStore.getList).toEqual([
+    expect(wrapper.vm.todoStore.getItems).toEqual([
       {
         name: 'test name',
         done: true,
