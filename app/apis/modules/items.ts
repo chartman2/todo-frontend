@@ -1,7 +1,7 @@
-import ApiFactory from '~/app/apis/factory'
+import ApiService from '~/app/apis/apiService'
 import type { IFetchResponse } from '~/types/common'
 
-class ItemsModule extends ApiFactory {
+class ItemsModule extends ApiService {
   static readonly moduleName = "items"
 
   private URL: string = '/api/v1/todo/items'

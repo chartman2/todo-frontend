@@ -1,4 +1,4 @@
-class AppFactory {
+class AppService {
   protected nuxtApp: any
 
   constructor() {
@@ -6,4 +6,4 @@ class AppFactory {
   }
 }
 
-export default AppFactory
+export default AppService

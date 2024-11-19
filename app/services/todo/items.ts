@@ -1,8 +1,8 @@
-import AppFactory from '~/app/factory'
+import AppService from '~/app/appService'
 import { useTodoStore } from '~/stores/todo'
 import type { ReturnedResponseType } from '~/types/common'
 
-class ItemsModule extends AppFactory {
+class ItemsModule extends AppService {
   static readonly moduleName = 'items'
 
   async list (): Promise<ReturnedResponseType> {

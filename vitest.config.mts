@@ -4,16 +4,16 @@ import { fileURLToPath } from 'node:url'
 export default defineVitestConfig({
   // plugins: [vue()],
   test: {
-    // environment: 'nuxt',
-    // pool: 'threads',
-    // poolOptions: {
-    //   threads: {
-    //     // Threads related options here
-    //     maxThreads: 2,
-    //     minThreads: 1
-    //   },
-    // },
-    root: '/app/',
+    environment: 'nuxt',
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        // Threads related options here
+        maxThreads: 2,
+        minThreads: 1
+      },
+    },
+    // root: '/app/',
     dir: 'tests/',
     // mockReset: true,
     environmentOptions: {

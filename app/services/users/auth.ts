@@ -1,8 +1,8 @@
-import AppFactory from '~/app/factory'
+import AppService from '~/app/appService'
 import { useApplicationStore } from '~/stores/application'
 import type { ReturnedResponseType } from '~/types/common'
 
-class AuthModule extends AppFactory {
+class AuthModule extends AppService {
   static readonly moduleName: string = 'auth'
 
   async signIn (email: string, password: string): Promise<ReturnedResponseType> {

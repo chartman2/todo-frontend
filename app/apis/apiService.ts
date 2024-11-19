@@ -1,15 +1,17 @@
+// @ts-nocheck
 import { useStorage, createFetch } from '@vueuse/core'
 import type { RemovableRef } from '@vueuse/core'
 import type { IFetchResponse } from '~/types/common'
 import { DefaultStorage, type IStorage } from '~/types/auth/storage'
-// @ts-ignore
+
 import * as CryptoJS from 'crypto-js'
 
-class ApiFactory {
+class ApiService {
   static readonly MAX_ATTEMPS = 3
+  protected REFRESH_TOKEN: string = '/users/tokens/refresh'
 
   protected storage: RemovableRef<string>
-  
+
   private myFetch: any
   private maxAttempts: number = 2
   private key: string
@@ -17,6 +19,7 @@ class ApiFactory {
 
   constructor() {
     const config = useRuntimeConfig()
+    
     this.key = CryptoJS.enc.Utf8.parse(config.public.cryptSecretKey)
     this.iv = CryptoJS.enc.Utf8.parse('7061737323313233')
 
@@ -53,7 +56,6 @@ class ApiFactory {
   }
 
   async fetch (path: string, method: string, headers: HeadersInit, payload: object | null): Promise<IFetchResponse> {
-    const nuxtApp = useNuxtApp()
     const requestInit: RequestInit = { method, headers };
     
     let data = { data: {}, statusCode: 0 }
@@ -70,9 +72,9 @@ class ApiFactory {
         attempts++
         
         // @ts-ignore
-        if (path !== nuxtApp.$api.auth.REFRESH_TOKEN) {
+        if (path !== this.REFRESH_TOKEN) {
           // @ts-ignore
-          await nuxtApp.$api.auth.refreshToken()
+          await this.refreshToken()
         }
 
         data = { data: response.error.value, statusCode: response.statusCode.value }
@@ -162,4 +164,4 @@ class ApiFactory {
   }
 }
 
-export default ApiFactory
+export default ApiService

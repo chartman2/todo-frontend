@@ -1,7 +1,7 @@
-import AppFactory from '~/app/factory'
+import AppService from '~/app/appService'
 import { useTodoStore } from '~/stores/todo'
 
-class ScopesModule extends AppFactory {
+class ScopesModule extends AppService {
   static readonly moduleName = 'scopes'
 
   async list () {

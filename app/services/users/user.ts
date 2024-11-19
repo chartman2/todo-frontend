@@ -1,7 +1,7 @@
-import AppFactory from "~/app/factory"
+import AppService from "~/app/appService"
 import type { ReturnedResponseType } from "~/types/common"
 
-class UserModule extends AppFactory {
+class UserModule extends AppService {
   static readonly moduleName: string = 'user'
 
   async current (): Promise<ReturnedResponseType> {

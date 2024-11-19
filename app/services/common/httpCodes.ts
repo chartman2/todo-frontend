@@ -1,7 +1,7 @@
-import AppFactory from "~/app/factory"
+import AppService from "~/app/appService"
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "~/types/common"
 
-class HttpCodesModule extends AppFactory {
+class HttpCodesModule extends AppService {
   static readonly moduleName: string = 'httpCodes'
 
   checkApiResponse (data: string, statusCode: number | null) {

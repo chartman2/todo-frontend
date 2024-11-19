@@ -1,6 +1,6 @@
-import AppFactory from "~/app/factory";
+import AppService from "~/app/appService";
 
-class ApiErrors extends AppFactory {
+class ApiErrors extends AppService {
   static readonly moduleName: string = 'apiErrors'
 
   getIndividualItems (errors: { [key: string]: any }, key: string, translate: any) {

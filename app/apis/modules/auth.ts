@@ -1,15 +1,14 @@
-
-import ApiFactory from '~/app/apis/factory'
-import { DefaultStorage } from '~/types/auth/storage'
-import type { ILoginInput } from '~/types/auth/log_in'
+import ApiService from '~/app/apis/apiService'
 import type { IFetchResponse } from '~/types/common'
+import type { ILoginInput } from '~/types/auth/log_in'
+import { DefaultStorage } from '~/types/auth/storage'
 
-class AuthModule extends ApiFactory {
+class AuthModule extends ApiService {
   static readonly moduleName = "auth"
 
   private LOGIN: string = '/users/tokens/sign_in'
   private LOGOUT: string = '/users/tokens/sign_out'
-  private REFRESH_TOKEN: string = '/users/tokens/refresh'
+  // private REFRESH_TOKEN: string = '/users/tokens/refresh'
   private INFO: string = '/users/tokens/info'
 
   async signIn (credentials: ILoginInput): Promise<IFetchResponse> {
