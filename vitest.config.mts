@@ -28,12 +28,6 @@ export default defineVitestConfig({
           },
           overrides: {
             // other Nuxt config you want to pass
-            devtools: { 
-              enabled: false,
-              timeline: {
-                enabled: false
-              }
-            },
           },
           rootDir: fileURLToPath(new URL('./', import.meta.url)),
         },

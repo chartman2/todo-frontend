@@ -6,9 +6,7 @@
         icon="i-mdi:login-variant"
         subtitle=""
       />
-      <client-only>
         <card-log-in @on-sign-in="onSignIn" />
-      </client-only>
     </v-container>
   </v-row>
 </template>

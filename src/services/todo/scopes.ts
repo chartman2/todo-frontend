@@ -1,4 +1,4 @@
-import AppService from '~/app/appService'
+import AppService from '~/src/appService'
 import { useTodoStore } from '~/stores/todo'
 
 class ScopesModule extends AppService {

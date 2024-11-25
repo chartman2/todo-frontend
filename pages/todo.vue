@@ -16,15 +16,11 @@
         />
       </v-row>
 
-      <client-only>
-        <partial-todo-new @on-create-item="onCreateItem" />
-      </client-only>
+      <partial-todo-new @on-create-item="onCreateItem" />
         
       <section-title :title="$t('tasks.list.title')" />
 
-      <client-only>
-        <partial-todo-list @on-update-item="onUpdateItem" />
-      </client-only>
+      <partial-todo-list @on-update-item="onUpdateItem" />
     </v-container>
   </v-row>
 </template>

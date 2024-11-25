@@ -1,4 +1,4 @@
-import AppService from "~/app/appService"
+import AppService from "~/src/appService"
 import { StatusCode1xx, StatusCode2xx, StatusCode3xx, StatusCode4xx, StatusCode5xx } from "~/types/common"
 
 class HttpCodesModule extends AppService {

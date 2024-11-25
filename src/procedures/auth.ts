@@ -1,4 +1,4 @@
-import AppFactory from '~/app/appService'
+import AppFactory from '~/src/appService'
 import type { ReturnedResponseType } from "~/types/common"
 
 class AuthModule extends AppFactory {

@@ -1,4 +1,4 @@
-import AppService from "~/app/appService";
+import AppService from "~/src/appService";
 
 class ApiErrors extends AppService {
   static readonly moduleName: string = 'apiErrors'

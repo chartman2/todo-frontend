@@ -1,10 +1,10 @@
-import ApiService from '~/app/apis/apiService'
+import ApiService from '~/src/apis/apiService'
 import type { IFetchResponse } from '~/types/common'
 
-class ScopesModule extends ApiService {
-  static readonly moduleName = "scopes"
+class ItemsModule extends ApiService {
+  static readonly moduleName = "items"
 
-  private URL: string = '/api/v1/todo/scopes'
+  private URL: string = '/api/v1/todo/items'
 
   async index (): Promise<IFetchResponse> {
     return await this.fetch(this.URL, 'GET', this.getAuthHeaders(), null)
@@ -23,4 +23,4 @@ class ScopesModule extends ApiService {
   }
 }
 
-export default ScopesModule
+export default ItemsModule

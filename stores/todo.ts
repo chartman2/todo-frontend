@@ -22,7 +22,7 @@ export const useTodoStore = defineStore('todo', {
     },
   },
   persist: {
-      storage: persistedState.localStorage,
+      storage: piniaPluginPersistedstate.localStorage,
   },
 })
 

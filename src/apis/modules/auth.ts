@@ -1,4 +1,4 @@
-import ApiService from '~/app/apis/apiService'
+import ApiService from '~/src/apis/apiService'
 import type { IFetchResponse } from '~/types/common'
 import type { ILoginInput } from '~/types/auth/log_in'
 import { DefaultStorage } from '~/types/auth/storage'

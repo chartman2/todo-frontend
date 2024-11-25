@@ -1,6 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
   // @ts-ignore
-  const modulesToImport = import.meta.glob('../app/apis/modules/*.ts')
+  const modulesToImport = import.meta.glob('../src/apis/modules/*.ts')
   const modules = {}
 
   for (const path in modulesToImport) {

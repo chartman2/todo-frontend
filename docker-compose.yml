@@ -4,7 +4,7 @@ services:
   frontend:
     build: 
       context: ./
-      dockerfile: Dockerfile.nuxt
+      dockerfile: Dockerfile-nuxt.yml
     command:  sh -c "pnpm run dev"
     working_dir: '/app'
     user: node
@@ -54,7 +54,7 @@ services:
     # image: codercom/code-server
     build: 
       context: ./
-      dockerfile: Dockerfile.vscode
+      dockerfile: Dockerfile-vscode.yml
     depends_on:
       - frontend
     volumes:

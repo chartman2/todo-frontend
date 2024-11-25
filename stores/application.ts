@@ -1,4 +1,3 @@
-
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import type { IStatus } from '~/types/snackbar/type'
 import type { IUserResponse } from '~/types/user'
@@ -48,7 +47,7 @@ export const useApplicationStore = defineStore('application', {
     }
   },
   persist: {
-    storage: persistedState.localStorage,
+    storage: piniaPluginPersistedstate.localStorage,
   },
 })
 

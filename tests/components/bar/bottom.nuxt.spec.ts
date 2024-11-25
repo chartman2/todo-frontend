@@ -5,21 +5,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import TestResource from '~~/components/bar/bottom.vue'
 import { vuetifyStubs } from '~/tests/stubs/vuetify'
 
-const vueUse = vi.fn()
-const nuxtAppMock = {
-  vueApp: { use: vueUse }
-}
-const defineNuxtPluginMock = vi.fn((callbackfn) => {
-  return callbackfn(nuxtAppMock)
-})
-
-vi.doMock('#imports', () => {
-  return {
-    defineNuxtPlugin: defineNuxtPluginMock
-  }
-})
-
-describe('Components - bar/bottom', async () => {
+describe('Components - bar/bottom', () => {
   it('is a Vue instance', async () => {
     const wrapper = await mountSuspended(TestResource, {
       shallow: true,

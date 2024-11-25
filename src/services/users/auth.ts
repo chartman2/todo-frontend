@@ -1,4 +1,4 @@
-import AppService from '~/app/appService'
+import AppService from '~/src/appService'
 import { useApplicationStore } from '~/stores/application'
 import type { ReturnedResponseType } from '~/types/common'
 
