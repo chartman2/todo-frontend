@@ -65,6 +65,7 @@ export default defineNuxtConfig({
     locales: ['fr', 'en'],
     defaultLocale: 'fr', // not needed if you have @nuxtjs/i18n installed
   },
+  ssr: true,
   vuetify: {
     moduleOptions: {
       /* module specific options */
